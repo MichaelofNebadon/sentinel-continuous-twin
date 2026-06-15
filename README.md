@@ -104,30 +104,36 @@ Because the continuous twin is defined entirely by smooth ordinary differential 
 The structural block diagram below outlines the physical signal routing required to execute the continuous engine via analog hardware elements:
 
 
-ω ───┐
-│   ┌───────────┐    ┌───────────┐
-k ───┼──►│  sin(3θ)  ├───►│ Integrator│───┬─► θ(t) [Phase Output]
-│   │ Generator │    │   (∫dt)   │   │
-│   └─────▲─────┘    └───────────┘   │
-│         └──────────────────────────┤
-▼                                    │
+Schematic Topology
+
+The structural block diagram below outlines the physical signal routing required to execute the continuous engine via analog hardware elements:
+
+```text
+  ω ───┐
+       │   ┌───────────┐    ┌───────────┐
+  k ───┼──►│  sin(3θ)  ├───►│ Integrator│───┬─► θ(t) [Phase Output]
+       │   │ Generator │    │   (∫dt)   │   │
+       │   └─────▲─────┘    └───────────┘   │
+       │         └──────────────────────────┤
+       ▼                                    │
 ┌──────────────┐                            │
 │    H(θ)      │◄───────────────────────────┘
 │ Function Gen │
 └──────┬───────┘
-│ H(θ) Voltage
-▼
+       │ H(θ) Voltage
+       ▼
 ┌──────────────┐      ┌─────────────┐      ┌─────────────┐
 │ Differential ├─────►│  Multiplier ├─────►│ Low-Pass    ├─► x(t) [Amplitude]
 │ Amp [x - H]  │      │   [α(θ)]    │      │ Filter (LPF)│  │
 └──────▲───────┘      └──────▲──────┘      └─────────────┘  │
-│                     │                              │
-└─────────────────────┼──────────────────────────────┘
-│
-┌──────┴──────┐
-│   α(θ)      │
-│ Engine Gen  │
-└─────────────┘
+       │                     │                              │
+       └─────────────────────┼──────────────────────────────┘
+                             │
+                      ┌──────┴──────┐
+                      │   α(θ)      │
+                      │ Engine Gen  │
+                      └─────────────┘
+
 ### Circuit Implementation Details
 
 * **Phase Loop Circuit:** Implements $\dot{\theta} = \omega - k \sin(3\theta)$ using an active operational amplifier integrator to accumulate the net phase velocity. The input voltage $\omega$ provides the base driving frequency bias, while a high-frequency analog triple-angle sine generator (constructed via low-distortion analog multipliers like the AD633 or dedicated diode-shaping operational networks) creates the $\sin(3\theta)$ term. A summing amplifier feeds the compiled signal back into the integrator, locking the phase loop.
