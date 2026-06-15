@@ -209,7 +209,7 @@ k ───┼──►│  sin(3θ)  ├───►│ Integrator│───�
 │ Engine Gen  │
 └─────────────┘
 
-```### Circuit Implementation Details
+### Circuit Implementation Details
 
 * **Phase Loop Circuit:** Implements $\dot{\theta} = \omega - k \sin(3\theta)$ using an active operational amplifier integrator to accumulate the net phase velocity. The input voltage $\omega$ provides the base driving frequency bias, while a high-frequency analog triple-angle sine generator (constructed via low-distortion analog multipliers like the AD633 or dedicated diode-shaping operational networks) creates the $\sin(3\theta)$ term. A summing amplifier feeds the compiled signal back into the integrator, locking the phase loop.
 
