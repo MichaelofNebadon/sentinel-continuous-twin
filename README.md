@@ -128,12 +128,13 @@ k ───┼──►│  sin(3θ)  ├───►│ Integrator│───�
 │   α(θ)      │
 │ Engine Gen  │
 └─────────────┘
-```
 
+
+```
 ### Circuit Implementation Details
 
 * **Phase Loop Circuit:** Implements $\dot{\theta} = \omega - k \sin(3\theta)$ using an active operational amplifier integrator to accumulate the net phase velocity. The input voltage $\omega$ provides the base driving frequency bias, while a high-frequency analog triple-angle sine generator (constructed via low-distortion analog multipliers like the AD633 or dedicated diode-shaping operational networks) creates the $\sin(3\theta)$ term. A summing amplifier feeds the compiled signal back into the integrator, locking the phase loop.
-* **Amplitude Loop Circuit:** Implements $\dot{x} = -\alpha(\theta) \left[ x - H(\theta] \right]$ by routing the instantaneous output of your $H(\theta)$ function generator and the current amplitude voltage $x(t)$ into a high-precision differential amplifier to compute the instantaneous manifold distance error. This error voltage is then scaled by an Operational Transconductance Amplifier (OTA) or a voltage-controlled resistor driven by the $\alpha(\theta)$ engine generator, which dynamically throttles the relaxation rate before feeding the signal into a first-order low-pass RC filtering network.
+* **Amplitude Loop Circuit:** Implements $\dot{x} = -\alpha(\theta) \left[ x - H(\theta) \right]$ by routing the instantaneous output of your $H(\theta)$ function generator and the current amplitude voltage $x(t)$ into a high-precision differential amplifier to compute the instantaneous manifold distance error. This error voltage is then scaled by an Operational Transconductance Amplifier (OTA) or a voltage-controlled resistor driven by the $\alpha(\theta)$ engine generator, which dynamically throttles the relaxation rate before feeding the signal into a first-order low-pass RC filtering network.
 
 ### Hardware Performance
 When hardwired into an IC or discrete analog board, the physical properties of the component transistors naturally solve the ODEs in continuous time. Depending on the transistor technology, OTA bandwidth, and op-amp slew rates chosen for fabrication, this layout permits extremely low-latency operation relative to traditional digital software implementations. This makes it a viable architecture for secure communications via chaotic carrier modulation, embedded chaos sensors, or high-entropy analog random number generators.
@@ -146,4 +147,3 @@ When hardwired into an IC or discrete analog board, the physical properties of t
 2. **Ott, E., Grebogi, C., & Yorke, J. A. (1990).** Controlling chaos. *Physical Review Letters*, 64(11), 1196.
 3. **Gilmore, R., & Lefranc, M. (2002).** *The Topology of Chaos: Alice in Stretch and Squeezeland*. Wiley-VCH.
 
-```
