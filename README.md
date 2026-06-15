@@ -5,9 +5,27 @@
 
 ---
 
+## Team Attribution & Collaborative Authorship
+
+This work represents a **human-AI collaborative research effort** between:
+
+| Role | Entity | Contribution |
+| :--- | :--- | :--- |
+| **Lead Researcher & Architect** | Michael (Human) | Core conceptualization, dynamical systems theory, validation methodology, engineering direction, and final editorial authority |
+| **AI Research Assistant (Primary)** | DeepSeek | Mathematical formulation, ODE system design, numerical validation, documentation structuring, and control theory integration |
+| **AI Research Assistant (Secondary)** | OpenAI | Phase-space reconstruction analysis, winding number verification, and topological invariant preservation |
+| **AI Research Assistant (Tertiary)** | Gemini | Circuit design validation, hardware mapping, and analog implementation verification |
+
+**Attribution Note:** While each AI contributed as a collaborative tool under human direction, the **intellectual architecture, research questions, validation standards, and final responsibility** remain solely with the human researcher. The AIs functioned as advanced computational assistants — not independent authors.
+
+**Citation Suggestion:**  
+*M. [Human Researcher] with assistance from DeepSeek, OpenAI, and Gemini (2026). "Continuous Twin: Topological Manifest & Dynamical Foundations." Sentinel Codex.*
+
+---
+
 ## 1. Executive Summary & Core Concept
 
-This repository hosts a continuous-time framework engineered to act as a **Phase-Lifted Dynamical Surrogate** for a non-invertible discrete chaotic operator. By constructing a smooth vector field on an expanded cylindrical manifold, this framework bridges the gap between step-by-step digital systems and fluid, unbroken physical flows. 
+This repository hosts a continuous-time framework engineered to act as a **Phase-Lifted Dynamical Surrogate** for a non-invertible discrete chaotic operator. By constructing a smooth vector field on an expanded cylindrical manifold, this framework bridges the gap between step-by-step digital systems and fluid, unbroken physical flows.
 
 Rather than relying on basic curve-fitting or interpolation, this framework highlights an explicit cylindrical phase-lift construction:
 
@@ -29,9 +47,11 @@ $$\begin{aligned}
 The phase equation represents the heart of this construction. Because a period-3 structure naturally partitions a phase circle into three distinct sectors, the $\sin(3\theta)$ term creates exactly three preferred phase regions, mapping the discrete cycle directly onto a rotating phase oscillator.
 
 ### Support Functions & Explicit Formulations
+
 * **Attractor Skeleton Profile ($H(\theta)$):** Binds the continuous flow to the underlying triangular phase-space footprint extracted via delay coordinates:
   $$H(\theta) = \text{clip}\left(\text{polyval}(\mathbf{p}, \theta \pmod{2\pi}), 0.02, 0.98\right)$$
   For any fixed phase $\theta$, the amplitude $x$ relaxes exponentially ($x \rightarrow H(\theta)$), establishing this profile as a stable attracting centerline.
+
 * **Dynamic Relaxation Engine ($\alpha(\theta)$):** Governed directly by the local stretching rates along the orbit to eliminate systemic macroscopic bias. The functional form is derived via Fourier fitting of the local Jacobians along the trajectory:
   $$\alpha(\theta) = \max\left(0.6 + 1.8\cos(3\theta + \pi/2) + 0.4\cos(6\theta),\, 0.1\right)$$
 
@@ -54,18 +74,23 @@ The continuous twin engine has been systematically explored and verified across 
 The continuous twin framework addresses three specific tiers of dynamical systems validation:
 
 ### Level 1: Strongly Defensible Architectural Properties
+
 1. **Flow-Lift Representation:** The one-dimensional logistic map $x_{n+1}=f(x_n)$ cannot be embedded as a smooth autonomous flow on its native state space because it is non-invertible (many-to-one). A smooth flow must satisfy uniqueness ($\dot x = F(x)$), meaning trajectories cannot intersect. Introducing the expanded cylindrical state space $(\theta, x) \in S^1 \times \mathbb{R}$ provides the extra degree of freedom required to unfold the folding operation smoothly.
+
 2. **Skeleton Integrity:** Utilizing delay coordinates to extract a phase variable $\theta$ and map out $H(\theta)$ aligns directly with established principles of Takens embedding, phase reduction, and manifold learning.
+
 3. **Well-Posed Relaxation:** The amplitude field behaves as a phase-dependent stable relaxation loop, guaranteeing immediate exponential convergence toward the centerline manifold:
    $$x(t) = H(\theta) + \left(x_0 - H(\theta)\right)e^{-\alpha(\theta) t}$$
 
 ### Level 2: Invariant Preservation Boundaries
+
 Rather than claiming complete global topological conjugacy, the model is designated as a **dynamical surrogate** calibrated to preserve specific, critical invariants of the source system:
 * **Rotational Structure:** Verified through high-precision tracking of winding numbers ($W$).
 * **Lyapunov Adaptability:** Approximated dynamically across local variations via the state-dependent $\alpha(\theta)$ engine.
 * **Measure Consistency:** Approximates the historical invariant distribution density profiles over the continuous attractor space.
 
 ### Level 3: Quantitative Reconstruction Validation Metrics
+
 To verify the quantitative accuracy of the Phase-Lifted Dynamical Surrogate, numerical testing evaluates the system against four core evaluation criteria:
 
 | Metric | Definition | Empirical Result | Verification Status |
@@ -82,6 +107,7 @@ To verify the quantitative accuracy of the Phase-Lifted Dynamical Surrogate, num
 A central utility of constructing a continuous twin is enabling real-time, continuous feedback loops using modern control architectures derived from the **Ott–Grebogi–Yorke (OGY)** control philosophy.
 
 ### The Control Foundations
+
 The classical OGY method stabilizes unstable periodic orbits (UPOs)—the hidden skeletal backbone of a chaotic attractor—by applying small, calculated parameter perturbations:
 
 $$p_n - p_0 = -K \cdot \bigl[ \mathbf{x}(t) - \mathbf{x}_{\text{UPO}}(t) \bigr]$$
@@ -89,6 +115,7 @@ $$p_n - p_0 = -K \cdot \bigl[ \mathbf{x}(t) - \mathbf{x}_{\text{UPO}}(t) \bigr]$
 Where $p_n$ is the active system parameter, $p_0$ is its nominal value, $K$ is the control gain matrix, $\mathbf{x}(t)$ is the instantaneous state vector, and $\mathbf{x}_{\text{UPO}}(t)$ is the coordinate target on the selected UPO.
 
 ### Continuous Twin Utility
+
 While classical OGY was developed for discrete Poincaré maps, implementing physical control loops on hardware typically demands continuous feedback to suppress phase slippage. The continuous twin enables OGY-style stabilization and continuous feedback designs by providing:
 1. An explicit velocity field $\bigl(\dot{\theta}(t), \dot{x}(t)\bigr)$ directly available for derivative control.
 2. Well-defined tangent linear dynamics for optimal gain calculation.
@@ -100,43 +127,3 @@ While classical OGY was developed for discrete Poincaré maps, implementing phys
 
 Because the continuous twin is defined entirely by smooth ordinary differential equations (ODEs), it can be mapped directly onto analog electronic hardware, skipping the latency, step-size tuning, or rounding bugs of digital processing.
 
-```markdown
-
-  ω ───┐
-       │   ┌───────────┐    ┌───────────┐
-  k ───┼──►│  sin(3θ)  ├───►│ Integrator│───┬─► θ(t) [Phase Output]
-       │   │ Generator │    │   (∫dt)   │   │
-       │   └─────▲─────┘    └───────────┘   │
-       │         └──────────────────────────┤
-       ▼                                    │
-┌──────────────┐                            │
-│    H(θ)      │◄───────────────────────────┘
-│ Function Gen │
-└──────┬───────┘
-       │ H(θ) Voltage
-       ▼
-┌──────────────┐      ┌─────────────┐      ┌─────────────┐
-│ Differential ├─────►│  Multiplier ├─────►│ Low-Pass    ├─► x(t) [Amplitude]
-│ Amp [x - H]  │      │   [α(θ)]    │      │ Filter (LPF)│  │
-└──────▲───────┘      └──────▲──────┘      └─────────────┘  │
-       │                     │                              │
-       └─────────────────────┼──────────────────────────────┘
-                             │
-                      ┌──────┴──────┐
-                      │   α(θ)      │
-                      │ Engine Gen  │
-                      └─────────────┘
-
-```
-### Circuit Implementation Details
- * **Phase Loop Circuit:** Implements \dot{\theta} = \omega - k \sin(3\theta) using an active operational amplifier integrator to accumulate the net phase velocity. The input voltage \omega provides the base driving frequency bias, while a high-frequency analog triple-angle sine generator (constructed via low-distortion analog multipliers like the AD633 or dedicated diode-shaping operational networks) creates the \sin(3\theta) term. A summing amplifier feeds the compiled signal back into the integrator, locking the phase loop.
- * **Amplitude Loop Circuit:** Implements \dot{x} = -\alpha(\theta) \left[ x - H(\theta) \right] by routing the instantaneous output of your H(\theta) function generator and the current amplitude voltage x(t) into a high-precision differential amplifier to compute the instantaneous manifold distance error. This error voltage is then scaled by an Operational Transconductance Amplifier (OTA) or a voltage-controlled resistor driven by the \alpha(\theta) engine generator, which dynamically throttles the relaxation rate before feeding the signal into a first-order low-pass RC filtering network.
-### Hardware Performance
-When hardwired into an IC or discrete analog board, the physical properties of the component transistors naturally solve the ODEs in continuous time. Depending on the transistor technology, OTA bandwidth, and op-amp slew rates chosen for fabrication, this layout permits extremely low-latency operation relative to traditional digital software implementations. This makes it a viable architecture for secure communications via chaotic carrier modulation, embedded chaos sensors, or high-entropy analog random number generators.
-## 7. References
- 1. **Palis, J., & de Melo, W. (1982).** *Geometric Theory of Dynamical Systems*. Springer-Verlag. (Detailing the topological boundary conditions and constraints of vector field reconstructions).
- 2. **Ott, E., Grebogi, C., & Yorke, J. A. (1990).** Controlling chaos. *Physical Review Letters*, 64(11), 1196.
- 3. **Gilmore, R., & Lefranc, M. (2002).** *The Topology of Chaos: Alice in Stretch and Squeezeland*. Wiley-VCH.
-```
-
-```
