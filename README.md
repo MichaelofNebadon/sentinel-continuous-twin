@@ -128,9 +128,6 @@ k ───┼──►│  sin(3θ)  ├───►│ Integrator│───�
 │   α(θ)      │
 │ Engine Gen  │
 └─────────────┘
-
-
-```
 ### Circuit Implementation Details
 
 * **Phase Loop Circuit:** Implements $\dot{\theta} = \omega - k \sin(3\theta)$ using an active operational amplifier integrator to accumulate the net phase velocity. The input voltage $\omega$ provides the base driving frequency bias, while a high-frequency analog triple-angle sine generator (constructed via low-distortion analog multipliers like the AD633 or dedicated diode-shaping operational networks) creates the $\sin(3\theta)$ term. A summing amplifier feeds the compiled signal back into the integrator, locking the phase loop.
@@ -146,4 +143,5 @@ When hardwired into an IC or discrete analog board, the physical properties of t
 1. **Palis, J., & de Melo, W. (1982).** *Geometric Theory of Dynamical Systems*. Springer-Verlag. (Detailing the topological boundary conditions and constraints of vector field reconstructions).
 2. **Ott, E., Grebogi, C., & Yorke, J. A. (1990).** Controlling chaos. *Physical Review Letters*, 64(11), 1196.
 3. **Gilmore, R., & Lefranc, M. (2002).** *The Topology of Chaos: Alice in Stretch and Squeezeland*. Wiley-VCH.
+
 
