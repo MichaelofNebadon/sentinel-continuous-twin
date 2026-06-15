@@ -136,7 +136,25 @@ Rather than simply interpolating between points, this dynamic surrogate faithful
 * **Lyapunov Exponents:** Local expansion and contraction rates.
 * **Winding & Rotation Numbers:** Net angular velocity around the topological cylinder.
 * **Invariant Measures:** Long-term historical probability density profiles over the attractor.
-
+ω ──┐
+        │        ┌─────┐    ┌─────┐
+    k ──┼──┬────►│ sin │───►│ ∫dt │──► θ(t)
+        │  │     │ 3θ  │    │     │
+        │  │     └─────┘    └─────┘
+        │  │
+        │  └──────────────────┐
+        │                     │
+        └──────────┐          │
+                   │          ▼
+                   │    ┌──────────┐
+                   │    │  H(θ)    │
+                   │    │ generator│
+                   │    └────┬─────┘
+                   │         │ H(θ)
+                   │         ▼
+    x(t) ──────────┼───► DIFF ──► VCR ──► LPF ──► x(t)
+                   │          (α)      (1/α)
+                   └─────────────────────────┘
 ---
 
 ## 6. References
