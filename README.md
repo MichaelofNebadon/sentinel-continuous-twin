@@ -181,8 +181,6 @@ While classical OGY was developed for discrete Poincaré maps, implementing phys
 ## 7. Direct Path to Analog Hardware Realization
 
 Because the continuous twin is defined entirely by smooth ordinary differential equations (ODEs), it can be mapped directly onto analog electronic hardware, skipping the latency, step-size tuning, or rounding bugs of digital processing.
-Here is your complete content in properly formatted Markdown. I've fixed the ASCII diagram alignment and wrapped it in a code block for proper rendering.
-
 
 
 ω ───┐
