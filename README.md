@@ -1,4 +1,20 @@
 # sentinel-continuous-twin
+
+### 2. Core Dynamic Equations
+
+The continuous dynamical surrogate is governed by a coupled system of autonomous ordinary differential equations:
+
+$$\begin{aligned}
+\dot\theta &= \omega - k \sin(3\theta) \\
+\dot x &= -\alpha(\theta) \left[ x - H(\theta) \right]
+\end{aligned}$$
+
+### 7. Direct Compatibility with OGY Chaos Control
+
+The OGY method stabilizes an unstable periodic orbit (UPO) by applying small, timely parameter perturbations:
+
+$$p_n - p_0 = -K \cdot \left[ \mathbf{x}(t) - \mathbf{x}_{\text{UPO}}(t) \right]$$
+
 # Continuous Twin: Topological Manifest & Dynamical Foundations
 ## 7. Direct Compatibility with OGY Chaos Control
 
