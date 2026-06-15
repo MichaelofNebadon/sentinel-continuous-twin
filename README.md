@@ -182,5 +182,4 @@ This research was conducted as a **collaborative human-AI effort**. The human re
 
 **Document Version:** 1.0  
 **Last Updated:** 2026-06-14  
-**License:** [Specify your license here, e.g., MIT, GPL, or All Rights Reserved]
-```
+**All Rights Reserved]
