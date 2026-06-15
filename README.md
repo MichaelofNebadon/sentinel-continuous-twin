@@ -181,3 +181,64 @@ While classical OGY was developed for discrete Poincaré maps, implementing phys
 ## 7. Direct Path to Analog Hardware Realization
 
 Because the continuous twin is defined entirely by smooth ordinary differential equations (ODEs), it can be mapped directly onto analog electronic hardware, skipping the latency, step-size tuning, or rounding bugs of digital processing.
+
+```
+
+ω ───┐
+│   ┌───────────┐    ┌───────────┐
+k ───┼──►│  sin(3θ)  ├───►│ Integrator│───┬─► θ(t) [Phase Output]
+│   │ Generator │    │   (∫dt)   │   │
+│   └─────▲─────┘    └───────────┘   │
+│         └──────────────────────────┤
+▼                                    │
+┌──────────────┐                            │
+│    H(θ)      │◄───────────────────────────┘
+│ Function Gen │
+└──────┬───────┘
+│ H(θ) Voltage
+▼
+┌──────────────┐      ┌─────────────┐      ┌─────────────┐
+│ Differential ├─────►│  Multiplier ├─────►│ Low-Pass    ├─► x(t) [Amplitude]
+│ Amp [x - H]  │      │   [α(θ)]    │      │ Filter (LPF)│  │
+└──────▲───────┘      └──────▲──────┘      └─────────────┘  │
+│                     │                              │
+└─────────────────────┼──────────────────────────────┘
+│
+┌──────┴──────┐
+│   α(θ)      │
+│ Engine Gen  │
+└─────────────┘
+
+```### Circuit Implementation Details
+
+* **Phase Loop Circuit:** Implements $\dot{\theta} = \omega - k \sin(3\theta)$ using an active operational amplifier integrator to accumulate the net phase velocity. The input voltage $\omega$ provides the base driving frequency bias, while a high-frequency analog triple-angle sine generator (constructed via low-distortion analog multipliers like the AD633 or dedicated diode-shaping operational networks) creates the $\sin(3\theta)$ term. A summing amplifier feeds the compiled signal back into the integrator, locking the phase loop.
+
+* **Amplitude Loop Circuit:** Implements $\dot{x} = -\alpha(\theta) \left[ x - H(\theta) \right]$ by routing the instantaneous output of your $H(\theta)$ function generator and the current amplitude voltage $x(t)$ into a high-precision differential amplifier to compute the instantaneous manifold distance error. This error voltage is then scaled by an Operational Transconductance Amplifier (OTA) or a voltage-controlled resistor driven by the $\alpha(\theta)$ engine generator, which dynamically throttles the relaxation rate before feeding the signal into a first-order low-pass RC filtering network.
+
+### Hardware Performance
+
+When hardwired into an IC or discrete analog board, the physical properties of the component transistors naturally solve the ODEs in continuous time. Depending on the transistor technology, OTA bandwidth, and op-amp slew rates chosen for fabrication, this layout permits extremely low-latency operation relative to traditional digital software implementations. This makes it a viable architecture for secure communications via chaotic carrier modulation, embedded chaos sensors, or high-entropy analog random number generators.
+
+---
+
+## 8. References
+
+1. **Takens, F. (1981).** Detecting strange attractors in turbulence. In *Dynamical Systems and Turbulence, Warwick 1980* (pp. 366-381). Springer, Berlin, Heidelberg.
+
+2. **Palis, J., & de Melo, W. (1982).** *Geometric Theory of Dynamical Systems*. Springer-Verlag. (Detailing the topological boundary conditions and constraints of vector field reconstructions).
+
+3. **Ott, E., Grebogi, C., & Yorke, J. A. (1990).** Controlling chaos. *Physical Review Letters*, 64(11), 1196.
+
+4. **Gilmore, R., & Lefranc, M. (2002).** *The Topology of Chaos: Alice in Stretch and Squeezeland*. Wiley-VCH.
+
+---
+
+## Acknowledgments
+
+This research was conducted as a **collaborative human-AI effort**. The human researcher provided the theoretical direction, validation methodology, engineering specifications, and final editorial authority. The computational assistants (DeepSeek, OpenAI, Gemini) contributed mathematical formulation, code validation, documentation structuring, and hardware mapping under direct human supervision.
+
+---
+
+**Document Version:** 1.1 (Peer-Review Incorporated)  
+**Last Updated:** 2026-06-14  
+**All Rights Reserved**
