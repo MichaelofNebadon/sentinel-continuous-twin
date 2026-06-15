@@ -149,5 +149,3 @@ When hardwired into an IC or discrete analog board, the physical properties of t
 1. **Palis, J., & de Melo, W. (1982).** *Geometric Theory of Dynamical Systems*. Springer-Verlag. (Detailing the topological boundary conditions and constraints of vector field reconstructions).
 2. **Ott, E., Grebogi, C., & Yorke, J. A. (1990).** Controlling chaos. *Physical Review Letters*, 64(11), 1196.
 3. **Gilmore, R., & Lefranc, M. (2002).** *The Topology of Chaos: Alice in Stretch and Squeezeland*. Wiley-VCH.
-
-
