@@ -1,4 +1,3 @@
-```markdown
 # Continuous Twin: Topological Manifest & Dynamical Foundations
 
 **Project Reference:** Sentinel Codex — Phase Space Reconstruction  
@@ -105,7 +104,6 @@ Because the continuous twin is defined entirely by smooth ordinary differential 
 The structural block diagram below outlines the physical signal routing required to execute the continuous engine via analog hardware elements:
 
 
-```
 ω ───┐
 │   ┌───────────┐    ┌───────────┐
 k ───┼──►│  sin(3θ)  ├───►│ Integrator│───┬─► θ(t) [Phase Output]
